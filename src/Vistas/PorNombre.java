@@ -1,26 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
+import Entidades.Producto;
+import java.util.ArrayList;
+import java.util.TreeSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author CCMEW
- */
-public class PorNombre extends javax.swing.JInternalFrame {
 
- DefaultTableModel tablaProducto= new DefaultTableModel();
-    public PorNombre() {
+public class PorNombre extends javax.swing.JInternalFrame {
+    DefaultTableModel tablaModelo= new DefaultTableModel();
+    private ArrayList<Producto> productos;
+    
+    
+    public PorNombre(){
+        //Debería recibir por parámetro la lista de productos en el constructor.
+        
+        
         initComponents();
-            initComponents();
-       String[]titulo=new String[]{ "Código", "Descripcion", "Precio", "Stock"};
-       tablaProducto.setColumnIdentifiers(titulo);
+        
+        
+        //Hardcode de productos
+        productos=new ArrayList();
+        productos.add(new Producto(1,"Arroz",23,12,"Comestible"));
+        productos.add(new Producto(2,"Polenta",3,9,"Comestible"));
+        productos.add(new Producto(3,"Pollo",2,20,"Comestible"));
+        productos.add(new Producto(4,"A Perfume",4,52,"Perfumeria"));
+
        
-        tablaProd.setModel(tablaProducto);
+        //Carga de la cabecera de la tabla.
+        String[]titulo=new String[]{ "Código", "Descripcion", "Precio", "Stock"};
+        tablaModelo.setColumnIdentifiers(titulo);
+        tablaProd.setModel(tablaModelo);
+        mostrarTodo();
     }
 
     /**
@@ -59,6 +70,12 @@ public class PorNombre extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(tablaProd);
+
+        jtBuscarNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtBuscarNombreKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,6 +118,32 @@ public class PorNombre extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Evento de ESCRIBIR EN EL jtBuscarNombre
+    private void jtBuscarNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarNombreKeyReleased
+        // TODO add your handling code here:
+        String buscar=jtBuscarNombre.getText().toLowerCase();
+        boolean hayElementos=false;
+        
+        borrarFilas();//Limpia la tabla para poder actualizarla correctamente.
+        
+        //Si el jtBuscarNombre está vacío, muestra la lista completa.
+        if(jtBuscarNombre.getText().isEmpty()){
+            hayElementos=true;
+            mostrarTodo();        
+        }else{//Si hay texto, busca coincidencia con la descripción del producto y lo muestra en la tabla
+            for(Producto prod:productos){
+                if(prod.getDescripcion().toLowerCase().startsWith(buscar)){
+                    hayElementos=true;
+                    tablaModelo.addRow(new Object[]{prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getStock()});
+                }
+            }
+        }
+        //Si no hubo coincidencias, avisa que con Mensaje.
+        if(!hayElementos){
+            JOptionPane.showMessageDialog(this,"No hay elementos que coincidan con la busqueda.");
+        }
+    }//GEN-LAST:event_jtBuscarNombreKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -109,4 +152,21 @@ public class PorNombre extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtBuscarNombre;
     private javax.swing.JTable tablaProd;
     // End of variables declaration//GEN-END:variables
+    
+    
+    //Borra todas las filas de la tabla.
+    private void borrarFilas() {
+        int filas=tablaModelo.getRowCount();
+        
+        for(int i=filas-1;i>=0;i--){
+            tablaModelo.removeRow(i);
+        }
+    }
+
+    //Muestre en la tabla todos los elementos de la lista de productos.
+    private void mostrarTodo() {
+        for(Producto prod:productos){
+            tablaModelo.addRow(new Object[]{prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getStock()});
+        }
+    }
 }

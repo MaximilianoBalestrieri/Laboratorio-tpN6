@@ -108,6 +108,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="jtBuscarNombre">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtBuscarNombreKeyReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

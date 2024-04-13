@@ -2,7 +2,7 @@ package Entidades;
 
 
 public class Rubro {
-     private int id;
+    private int id;
     private String nombre;
 
     public Rubro(int id, String nombre) {
@@ -50,7 +50,7 @@ public class Rubro {
 
     @Override
     public int hashCode() {
-       int hash = 5;
+        int hash = 5;
         hash = 83 * hash + this.id;
         return hash;
     }

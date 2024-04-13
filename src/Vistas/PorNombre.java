@@ -1,7 +1,6 @@
 package Vistas;
 
 import Entidades.Producto;
-import java.util.ArrayList;
 import java.util.TreeSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -9,26 +8,19 @@ import javax.swing.table.DefaultTableModel;
 
 public class PorNombre extends javax.swing.JInternalFrame {
     DefaultTableModel tablaModelo= new DefaultTableModel();
-    private ArrayList<Producto> productos;
+    private TreeSet<Producto> productos;
     
     
-    public PorNombre(){
+    public PorNombre(TreeSet<Producto> productos){
         //Debería recibir por parámetro la lista de productos en el constructor.
         
         
         initComponents();
-        
-        
-        //Hardcode de productos
-        productos=new ArrayList();
-        productos.add(new Producto(1,"Arroz",23,12,"Comestible"));
-        productos.add(new Producto(2,"Polenta",3,9,"Comestible"));
-        productos.add(new Producto(3,"Pollo",2,20,"Comestible"));
-        productos.add(new Producto(4,"A Perfume",4,52,"Perfumeria"));
+        this.productos=productos;
 
        
         //Carga de la cabecera de la tabla.
-        String[]titulo=new String[]{ "Código", "Descripcion", "Precio", "Stock"};
+        String[]titulo=new String[]{ "Código", "Descripcion", "Precio","Rubro", "Stock"};
         tablaModelo.setColumnIdentifiers(titulo);
         tablaProd.setModel(tablaModelo);
         mostrarTodo();
@@ -94,9 +86,9 @@ public class PorNombre extends javax.swing.JInternalFrame {
                 .addContainerGap(62, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(49, 49, 49)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(61, Short.MAX_VALUE)))
+                    .addGap(16, 16, 16)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(18, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +99,7 @@ public class PorNombre extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(jtBuscarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(134, 134, 134)
@@ -134,13 +126,13 @@ public class PorNombre extends javax.swing.JInternalFrame {
             for(Producto prod:productos){
                 if(prod.getDescripcion().toLowerCase().startsWith(buscar)){
                     hayElementos=true;
-                    tablaModelo.addRow(new Object[]{prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getStock()});
+                    tablaModelo.addRow(new Object[]{prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getRubro().getNombre(),prod.getStock()});
                 }
             }
         }
         //Si no hubo coincidencias, avisa que con Mensaje.
         if(!hayElementos){
-            JOptionPane.showMessageDialog(this,"No hay elementos que coincidan con la busqueda.");
+            tablaModelo.addRow(new Object[]{"No hay elementos que coincidan con la busqueda"});
         }
     }//GEN-LAST:event_jtBuscarNombreKeyReleased
 
@@ -166,7 +158,7 @@ public class PorNombre extends javax.swing.JInternalFrame {
     //Muestre en la tabla todos los elementos de la lista de productos.
     private void mostrarTodo() {
         for(Producto prod:productos){
-            tablaModelo.addRow(new Object[]{prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getStock()});
+            tablaModelo.addRow(new Object[]{prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getRubro().getNombre(),prod.getStock()});
         }
     }
 }

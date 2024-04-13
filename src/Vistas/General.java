@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import Entidades.Producto;
+import Entidades.Rubro;
 import java.util.TreeSet;
 
-/**
- *
- * @author CCMEW
- */
+
 public class General extends javax.swing.JFrame {
     private TreeSet<Producto> listaProd=new TreeSet<>();
 
@@ -19,7 +12,16 @@ public class General extends javax.swing.JFrame {
      * Creates new form General
      */
     public General() {
-        initComponents();    
+        initComponents();
+        
+        //LISTA HARDCODE DE PRODUCTOS
+        listaProd.add(new Producto(101,"Arroz",23,12.50,new Rubro(1,"Comestible")));
+        listaProd.add(new Producto(102,"Polenta",3,9,new Rubro(1,"Comestible")));
+        listaProd.add(new Producto(103,"Pollo",2,20.1,new Rubro(1,"Comestible")));
+        listaProd.add(new Producto(104,"A Perfume",4,52.99,new Rubro(3,"Perfumeria")));
+        listaProd.add(new Producto(105,"Limp Tree",2,55,new Rubro(2,"Limpieza")));
+        listaProd.add(new Producto(107,"Rexona",4,152.15,new Rubro(3,"Perfumeria")));
+        
     }
 
     /**
@@ -35,11 +37,11 @@ public class General extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmGestion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jmListaRubro = new javax.swing.JMenuItem();
+        jmListaNombre = new javax.swing.JMenuItem();
+        jmListaPrecio = new javax.swing.JMenuItem();
 
         jTextField1.setText("jTextField1");
 
@@ -50,7 +52,7 @@ public class General extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -59,46 +61,41 @@ public class General extends javax.swing.JFrame {
 
         jMenu1.setText("Administracion");
 
-        jMenuItem1.setText("Producto");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmGestion.setText("Producto");
+        jmGestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmGestionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jmGestion);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consulta");
 
-        jMenuItem2.setText("Por Rubro");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmListaRubro.setText("Por Rubro");
+        jmListaRubro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmListaRubroActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenu2.add(jmListaRubro);
 
-        jMenuItem3.setText("Por Nombre");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmListaNombre.setText("Por Nombre");
+        jmListaNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmListaNombreActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu2.add(jmListaNombre);
 
-        jMenuItem4.setText("Por Precio");
-        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem4MouseClicked(evt);
-            }
-        });
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jmListaPrecio.setText("Por Precio");
+        jmListaPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jmListaPrecioActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(jmListaPrecio);
 
         jMenuBar1.add(jMenu2);
 
@@ -119,47 +116,46 @@ public class General extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-Gestion producto=new Gestion(listaProd);
+    //EVENTO HACER CLICK en GESTION de PRODUCTO.
+    private void jmGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionActionPerformed
+        Gestion producto=new Gestion(listaProd);
         escritorio.removeAll();
         escritorio.repaint();
-       escritorio.add(producto);
+        escritorio.add(producto);
         producto.toFront();
         producto.setVisible(true);
       
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmGestionActionPerformed
 
-    private void jMenuItem4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MouseClicked
-    
-    }//GEN-LAST:event_jMenuItem4MouseClicked
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
- ListaPrecio lista=new ListaPrecio();
+    //EVENTO HACER CLICK en CONSULTA POR PRECIO
+    private void jmListaPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaPrecioActionPerformed
+        ListaPrecio lista=new ListaPrecio();
         escritorio.removeAll();
         escritorio.repaint();
         escritorio.add(lista);
         lista.toFront();
-        lista.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+        lista.setVisible(true);
+    }//GEN-LAST:event_jmListaPrecioActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
+    //EVENTO HACER CLICK en CONSULTA POR RUBRO
+    private void jmListaRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaRubroActionPerformed
+        PorRubro lista=new PorRubro(listaProd);
         escritorio.removeAll();
         escritorio.repaint();
-        PorRubro lista=new PorRubro(listaProd);
         escritorio.add(lista);
         lista.toFront();
         lista.setVisible(true); 
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jmListaRubroActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        PorNombre lista=new PorNombre();
+    //EVENTO HACER CLICK en CONSULTA POR NOMBRE
+    private void jmListaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaNombreActionPerformed
+        PorNombre lista=new PorNombre(listaProd);
         escritorio.removeAll();
         escritorio.repaint();
         escritorio.add(lista);
         lista.toFront();
         lista.setVisible(true);         
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmListaNombreActionPerformed
 
 
     public static void main(String args[]) {
@@ -205,10 +201,10 @@ Gestion producto=new Gestion(listaProd);
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenuItem jmGestion;
+    private javax.swing.JMenuItem jmListaNombre;
+    private javax.swing.JMenuItem jmListaPrecio;
+    private javax.swing.JMenuItem jmListaRubro;
     // End of variables declaration//GEN-END:variables
 }

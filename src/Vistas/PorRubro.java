@@ -18,9 +18,9 @@ public class PorRubro extends javax.swing.JInternalFrame {
     public PorRubro(TreeSet<Producto> listaProd) {
         initComponents();
         this.listaProd = listaProd;
-       tablaProducto= new DefaultTableModel();
-       combo();
-       armadoColumnas();
+        tablaProducto= new DefaultTableModel();
+        combo();
+        armadoColumnas();
     
     }
 
@@ -75,13 +75,13 @@ public class PorRubro extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,10 +104,14 @@ public class PorRubro extends javax.swing.JInternalFrame {
 
         borrarFila();
         Rubro seleccionado = (Rubro)cmbCategoria.getSelectedItem();
+        
         for (Producto producto : listaProd) {
-            if(producto.getCategoria().equals(seleccionado)){
-                tablaProducto.addRow(new Object[]{producto.getCodigo(), producto.getDescripcion(), producto.getPrecio(),producto.getCategoria(),producto.getStock()});
-       }
+//            if(producto.getCategoria().equals(seleccionado)){
+//                tablaProducto.addRow(new Object[]{producto.getCodigo(), producto.getDescripcion(), producto.getPrecio(),producto.getCategoria(),producto.getStock()});
+//            }
+            if(producto.getRubro().equals(seleccionado)){
+                tablaProducto.addRow(new Object[]{producto.getCodigo(), producto.getDescripcion(), producto.getPrecio(),producto.getRubro().getNombre(),producto.getStock()});
+            }
         }
     }//GEN-LAST:event_cmbCategoriaActionPerformed
 
@@ -128,6 +132,7 @@ public class PorRubro extends javax.swing.JInternalFrame {
         cmbCategoria.addItem(comestible);
         cmbCategoria.addItem(limpieza);
         cmbCategoria.addItem(perfumeria);
+        cmbCategoria.setSelectedIndex(-1);
     }
 
     private void armadoColumnas() {
@@ -136,14 +141,15 @@ public class PorRubro extends javax.swing.JInternalFrame {
         colum.add("Código");
         colum.add("Descripción");
         colum.add("Precio");
-        colum.add("Categoria");
+        colum.add("Rubro");
         colum.add("Stock");      
         for (Object a: colum) {
             tablaProducto.addColumn(a);    
-        }   
+        }  
+        tablaProd.setModel(tablaProducto);
     }
     
-   private void borrarFila(){
+    private void borrarFila(){
   
          int f=tablaProducto.getRowCount()-1;
          for(int i=f;i >= 0;i--){     

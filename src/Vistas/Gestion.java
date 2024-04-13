@@ -305,7 +305,14 @@ public Gestion(TreeSet<Producto>productos) {
             return;
         }
         
-        rubro =(Rubro) jcRubros.getSelectedItem();
+        if(!(jcRubros.getSelectedIndex()<0)){
+            rubro =(Rubro) jcRubros.getSelectedItem();
+        }else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un rubro.","Rubro no seleccionado",JOptionPane.ERROR_MESSAGE);
+            jcRubros.requestFocus();
+            return;
+        }
+        
 
         
         Producto nvoProd=new Producto(codigo,descripcion,stock,precio,rubro);

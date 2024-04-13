@@ -13,7 +13,7 @@ public class General extends javax.swing.JFrame {
      */
     public General() {
         initComponents();
-        
+         this.setLocationRelativeTo(null);
         //LISTA HARDCODE DE PRODUCTOS
         listaProd.add(new Producto(101,"Arroz",23,12.50,new Rubro(1,"Comestible")));
         listaProd.add(new Producto(102,"Polenta",3,9,new Rubro(1,"Comestible")));
@@ -42,6 +42,7 @@ public class General extends javax.swing.JFrame {
         jmListaRubro = new javax.swing.JMenuItem();
         jmListaNombre = new javax.swing.JMenuItem();
         jmListaPrecio = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
 
         jTextField1.setText("jTextField1");
 
@@ -99,6 +100,19 @@ public class General extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Acerca de...");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,7 +123,9 @@ public class General extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,6 +173,26 @@ public class General extends javax.swing.JFrame {
         lista.setVisible(true);         
     }//GEN-LAST:event_jmListaNombreActionPerformed
 
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+         AcercaDe acerca=new AcercaDe();
+        escritorio.removeAll();
+        escritorio.repaint();
+        escritorio.add(acerca);
+        acerca.toFront();
+        acerca.setVisible(true);  
+          acerca.toFront();
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+     AcercaDe acerca=new AcercaDe();
+        escritorio.removeAll();
+        escritorio.repaint();
+        escritorio.add(acerca);
+        acerca.toFront();
+        acerca.setVisible(true);  
+          acerca.toFront();        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3MouseClicked
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -195,6 +231,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JMenuItem jmGestion;

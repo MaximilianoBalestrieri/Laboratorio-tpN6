@@ -19,7 +19,7 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
      */
     public ListaPrecio() {
         initComponents();
-          String[]titulo=new String[]{ "Código", "Descripcion", "Precio", "Stock"};
+       String[]titulo=new String[]{ "Código", "Descripcion", "Precio", "Stock"};
        tablaProducto.setColumnIdentifiers(titulo);
        
         tablaProd.setModel(tablaProducto);

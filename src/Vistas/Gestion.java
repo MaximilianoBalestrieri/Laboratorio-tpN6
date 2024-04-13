@@ -6,15 +6,22 @@
 package Vistas;
 
 import Entidades.Producto;
+import Entidades.Rubro;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 
 public class Gestion extends javax.swing.JInternalFrame {
-      private TreeSet<Producto> listaProd=new TreeSet<>();
-    
-    public Gestion(TreeSet<Producto> listaProd) {
+ private TreeSet<Producto> productos;
+ private Producto auxiliar=null;
+ 
+
+public Gestion() {
         initComponents();
-        
-        
+         this.productos=productos;
+//        llenarCombo();
     }
 
  
@@ -29,13 +36,13 @@ public class Gestion extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jtCodigo = new javax.swing.JTextField();
-        txtDescripcion = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
-        cmbCategoria = new javax.swing.JComboBox<>();
-        txtStock = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtDescripcion = new javax.swing.JTextField();
+        jtPrecio = new javax.swing.JTextField();
+        jcRubros = new javax.swing.JComboBox<>();
+        jtStock = new javax.swing.JTextField();
+        jbGuardar = new javax.swing.JButton();
         JbBuscar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -60,18 +67,23 @@ public class Gestion extends javax.swing.JInternalFrame {
 
         jtCodigo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        cmbCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpiza", "Perfumeria" }));
-        cmbCategoria.setSelectedIndex(-1);
+        jcRubros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jcRubros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpiza", "Perfumeria" }));
+        jcRubros.setSelectedIndex(-1);
 
-        txtStock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtStock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
-        jButton1.setText("Guardar");
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         JbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         JbBuscar.setText("Buscar");
@@ -81,8 +93,13 @@ public class Gestion extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
-        jButton3.setText("Nuevo");
+        jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
         jbEliminar.setText("Eliminar");
@@ -107,9 +124,9 @@ public class Gestion extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(jbNuevo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jbGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -126,11 +143,11 @@ public class Gestion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtCodigo)
-                    .addComponent(txtDescripcion)
-                    .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtDescripcion)
+                    .addComponent(jcRubros, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(JbBuscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -141,14 +158,14 @@ public class Gestion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcRubros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -161,15 +178,15 @@ public class Gestion extends javax.swing.JInternalFrame {
                                 .addGap(15, 15, 15)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(106, 106, 106)
                         .addComponent(jLabel5)))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminar)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3))
+                    .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbNuevo))
                 .addGap(23, 23, 23))
         );
 
@@ -204,40 +221,140 @@ public class Gestion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-System.exit(0);        // TODO add your handling code here:
+dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void JbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbBuscarActionPerformed
-     int codigo;
-////     if (validaEntero(jtCodigo.getText()));{
-////        codigo=Integer.parseInt(jtCodigo.getText());      }
-////     else {
-////             
-////             }
-////     
-////     for (Producto prod:Productos){
-//         
-//         if (codigo==prod.getCodigo()){
-//             txtDescripcion.setText(prod.getDescripcion);
-//             txtPrecio.setText(prod.getPrecio() + "");
-//             txtStock.setText(prod.getStock() + "");
-//             cmbCategoria.setSelectedItem(prod.getRubro());
-//             jbEliminar.setEnabled(true);
-//             return;
-//         }
-//     
+        int codigo;
+       
+        if(validaEntero(jtCodigo.getText())){
+            codigo = Integer.parseInt(jtCodigo.getText());
+        }else {
+        
+            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            jtCodigo.requestFocus();
+            return;
+        }
+        
+        for(Producto prod:productos){
+ 
+            if(codigo==prod.getCodigo()){
+            
+                jtDescripcion.setText(prod.getDescripcion());
+                jtPrecio.setText(prod.getPrecio()+"");
+                jtStock.setText(prod.getStock()+"");
+                jcRubros.setSelectedItem(prod.getCategoria());
+                jbEliminar.setEnabled(true);
+                auxiliar=prod;
+                return;
+                
+            }
+        }
+        
+        JOptionPane.showMessageDialog(this, "Codigo inexistente");
+        limpiar();
+        
     }//GEN-LAST:event_JbBuscarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-       
+        int opcion=JOptionPane.showConfirmDialog(this, "Confirma Eliminación S/N", "Confirmación",JOptionPane.YES_NO_OPTION);
+                if(opcion==JOptionPane.YES_OPTION){
+                     productos.remove(auxiliar);
+                    JOptionPane.showMessageDialog(this, "Producto Eliminado ");
+                    limpiar();
+                    auxiliar=null;
+                }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        int codigo;
+        String descripcion;
+        double precio;
+        Rubro rubro;
+        int stock;
+       
+        if(validaEntero(jtCodigo.getText())){
+            codigo = Integer.parseInt(jtCodigo.getText());
+        }else {
+        
+            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            jtCodigo.requestFocus();
+            return;
+        }
+       
+        if(validaEntero(jtStock.getText())){
+            stock = Integer.parseInt(jtStock.getText());
+        }else {
+        
+            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            jtStock.requestFocus();
+            return;
+        }
+        
+        if(validaReal(jtPrecio.getText())){
+            precio = Double.parseDouble(jtPrecio.getText());
+        }else {
+        
+            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            jtPrecio.requestFocus();
+            return;
+        }
+        
+        if(!jtDescripcion.getText().isEmpty()){
+        
+            descripcion = jtDescripcion.getText();
+        }else {
+            JOptionPane.showMessageDialog(this, "Ingresar una descripcion");
+            jtDescripcion.requestFocus();
+            return;
+        }
+        //  
+        rubro =(Rubro) jcRubros.getSelectedItem();
 
+// aca tira el error 
+        Producto nvoProd=new Producto(codigo,descripcion,precio,rubro, stock);
+       if(productos.add(nvoProd)){
+           JOptionPane.showMessageDialog(this, "Producto Agregado");
+           limpiar();
+       }else {
+       
+           JOptionPane.showMessageDialog(this, "Ya existe un producto con ese código");
+       }
+       
+                // TODO add your handling code here:
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+     limpiar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+  private boolean validaEntero(String nro){
+    
+        Pattern patron=Pattern.compile("^[0-9]+$");
+        Matcher m=patron.matcher(nro);
+        return m.matches();
+    }
+
+    private boolean validaReal(String nro){
+    Pattern patron=Pattern.compile("^[0-9]+.[0-9]{2}$");
+        Matcher m=patron.matcher(nro);
+        return m.matches();
+        
+    }
+    
+    private void limpiar(){
+    
+        jtCodigo.setText("");
+        jtDescripcion.setText("");
+        jtPrecio.setText("");
+        jtStock.setText("");
+        jcRubros.setSelectedIndex(-1);
+        jbEliminar.setEnabled(false);
+        auxiliar=null;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JbBuscar;
-    private javax.swing.JComboBox<String> cmbCategoria;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -247,9 +364,12 @@ System.exit(0);        // TODO add your handling code here:
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JComboBox<String> jcRubros;
     private javax.swing.JTextField jtCodigo;
-    private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtStock;
+    private javax.swing.JTextField jtDescripcion;
+    private javax.swing.JTextField jtPrecio;
+    private javax.swing.JTextField jtStock;
     // End of variables declaration//GEN-END:variables
 }

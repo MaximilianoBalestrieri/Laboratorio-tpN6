@@ -174,7 +174,7 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
         if (jtEntre1.getText().isEmpty()) {
             hayElementos = true;
             mostrarTodo();
-        } else {//Si hay texto, busca coincidencia con la descripción del producto y lo muestra en la tabla
+        } else {
             for (Producto prod : productos) {
                 if (prod.getPrecio()>buscar) {
                     hayElementos = true;
@@ -182,7 +182,7 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
                 }
             }
         }
-        //Si no hubo coincidencias, avisa que con Mensaje.
+        
         if (!hayElementos) {
             tablaProducto.addRow(new Object[]{"No hay elementos que coincidan con la busqueda"});
         }

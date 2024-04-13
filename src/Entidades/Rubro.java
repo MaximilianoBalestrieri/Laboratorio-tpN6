@@ -54,6 +54,11 @@ public class Rubro {
         hash = 83 * hash + this.id;
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return  nombre ;
+    }
     
     
     

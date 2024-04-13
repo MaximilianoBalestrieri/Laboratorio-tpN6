@@ -5,10 +5,15 @@
  */
 package Vistas;
 
-public class Gestion extends javax.swing.JInternalFrame {
+import Entidades.Producto;
+import java.util.TreeSet;
 
-    public Gestion() {
+public class Gestion extends javax.swing.JInternalFrame {
+      private TreeSet<Producto> listaProd=new TreeSet<>();
+    
+    public Gestion(TreeSet<Producto> listaProd) {
         initComponents();
+        
         
     }
 

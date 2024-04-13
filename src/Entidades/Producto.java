@@ -9,7 +9,7 @@ package Entidades;
  *
  * @author CCMEW
  */
-public class Producto {
+public class Producto implements Comparable<Producto>{
     private int codigo;
     private String descripcion;
     private int stock;
@@ -23,6 +23,66 @@ public class Producto {
         this.precio = precio;
         this.categoria = categoria;
     }
+
+    public Producto() {
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public int compareTo(Producto o) {
+         if(this.codigo==o.codigo){            
+            return 0;          
+        }else if(this.codigo >o.codigo){       
+            return 1;
+        }else {       
+            return -1;
+        }
+    }
+    
+    public String toString(){  
+       return codigo+" "+ " descripción: "+ descripcion;
+   }
+    }
     
     
-}
+    
+

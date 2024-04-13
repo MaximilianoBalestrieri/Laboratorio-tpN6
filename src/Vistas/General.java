@@ -5,17 +5,21 @@
  */
 package Vistas;
 
+import Entidades.Producto;
+import java.util.TreeSet;
+
 /**
  *
  * @author CCMEW
  */
 public class General extends javax.swing.JFrame {
+    private TreeSet<Producto> listaProd=new TreeSet<>();
 
     /**
      * Creates new form General
      */
     public General() {
-        initComponents();
+        initComponents();    
     }
 
     /**
@@ -116,7 +120,7 @@ public class General extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-Gestion producto=new Gestion();
+Gestion producto=new Gestion(listaProd);
         escritorio.removeAll();
         escritorio.repaint();
        escritorio.add(producto);
@@ -139,9 +143,10 @@ Gestion producto=new Gestion();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       PorRubro lista=new PorRubro();
+
         escritorio.removeAll();
         escritorio.repaint();
+        PorRubro lista=new PorRubro(listaProd);
         escritorio.add(lista);
         lista.toFront();
         lista.setVisible(true); 
@@ -188,6 +193,11 @@ Gestion producto=new Gestion();
                 new General().setVisible(true);
             }
         });
+        /*    java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Menu().setVisible(true);
+            }
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

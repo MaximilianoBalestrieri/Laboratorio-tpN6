@@ -16,6 +16,12 @@ public class AcercaDe extends javax.swing.JInternalFrame {
      */
     public AcercaDe() {
         initComponents();
+        
+//       Centra el JinternalFrame . En el desktop pane hay que ir a costumize code y poner public y Static
+        int a=General.escritorio.getWidth() - this.getWidth();
+        int b=General.escritorio.getHeight() - this.getHeight();
+        setLocation (a/2 , b/2);
+        setVisible(true);
        
     }
 

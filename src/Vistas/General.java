@@ -14,6 +14,7 @@ public class General extends javax.swing.JFrame {
     public General() {
         initComponents();
          this.setLocationRelativeTo(null);
+         
         //LISTA HARDCODE DE PRODUCTOS
         listaProd.add(new Producto(101,"Arroz",23,12.50,new Rubro(1,"Comestible")));
 
@@ -64,7 +65,7 @@ public class General extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
+            .addGap(0, 563, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Administracion");
@@ -130,9 +131,7 @@ public class General extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+            .addComponent(escritorio)
         );
 
         pack();
@@ -187,7 +186,7 @@ public class General extends javax.swing.JFrame {
         escritorio.add(acerca);
         acerca.toFront();
         acerca.setVisible(true);  
-          acerca.toFront();
+          acerca.setLocation(100, 100);
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
@@ -235,7 +234,7 @@ public class General extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

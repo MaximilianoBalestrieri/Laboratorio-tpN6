@@ -305,6 +305,7 @@ public Gestion(TreeSet<Producto>productos) {
             return;
         }
         
+<<<<<<< Updated upstream
         if(!(jcRubros.getSelectedIndex()<0)){
             rubro =(Rubro) jcRubros.getSelectedItem();
         }else {
@@ -314,6 +315,16 @@ public Gestion(TreeSet<Producto>productos) {
         }
         
 
+=======
+        rubro =(Rubro) jcRubros.getSelectedItem();
+        
+    if(jcRubros.getSelectedIndex()==-1){
+               
+            JOptionPane.showMessageDialog(this, "Debe ingresar un Rubro.","Rubro incorrecto",JOptionPane.ERROR_MESSAGE);
+            jcRubros.requestFocus();
+            return;
+        }
+>>>>>>> Stashed changes
         
         Producto nvoProd=new Producto(codigo,descripcion,stock,precio,rubro);
         if(productos.add(nvoProd)){
@@ -322,11 +333,12 @@ public Gestion(TreeSet<Producto>productos) {
         }else {
        
             JOptionPane.showMessageDialog(this, "Ya existe un producto con ese código","Código existente",JOptionPane.WARNING_MESSAGE);
+            jtCodigo.requestFocus();
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        limpiar();        // TODO add your handling code here:
+        limpiar();    
     }//GEN-LAST:event_jbNuevoActionPerformed
 
   private boolean validaEntero(String nro){

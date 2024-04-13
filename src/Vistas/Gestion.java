@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import Entidades.Producto;
@@ -18,10 +13,10 @@ public class Gestion extends javax.swing.JInternalFrame {
  private Producto auxiliar=null;
  
 
-public Gestion() {
+public Gestion(TreeSet<Producto>productos) {
         initComponents();
-         this.productos=productos;
-//        llenarCombo();
+        this.productos=productos;
+        llenarCombo();
     }
 
  
@@ -41,10 +36,10 @@ public Gestion() {
         jcRubros = new javax.swing.JComboBox<>();
         jtStock = new javax.swing.JTextField();
         jbGuardar = new javax.swing.JButton();
-        JbBuscar = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -72,7 +67,6 @@ public Gestion() {
         jtPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jcRubros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcRubros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpiza", "Perfumeria" }));
         jcRubros.setSelectedIndex(-1);
 
         jtStock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -85,11 +79,11 @@ public Gestion() {
             }
         });
 
-        JbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
-        JbBuscar.setText("Buscar");
-        JbBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JbBuscarActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
 
@@ -110,11 +104,11 @@ public Gestion() {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
-        jButton5.setText("Salir");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -130,7 +124,7 @@ public Gestion() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(jbSalir)
                 .addGap(124, 124, 124))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -149,7 +143,7 @@ public Gestion() {
                     .addComponent(jcRubros, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(JbBuscar)
+                .addComponent(jbBuscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -174,7 +168,7 @@ public Gestion() {
                                     .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(17, 17, 17))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(JbBuscar)
+                                .addComponent(jbBuscar)
                                 .addGap(15, 15, 15)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -183,7 +177,7 @@ public Gestion() {
                         .addComponent(jLabel5)))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminar)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbNuevo))
@@ -220,18 +214,18 @@ public Gestion() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-     dispose();    
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();    
+    }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void JbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbBuscarActionPerformed
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         int codigo;
        
         if(validaEntero(jtCodigo.getText())){
             codigo = Integer.parseInt(jtCodigo.getText());
         }else {
         
-            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número.","Código incorrecto",JOptionPane.ERROR_MESSAGE);
             jtCodigo.requestFocus();
             return;
         }
@@ -251,13 +245,13 @@ public Gestion() {
             }
         }
         
-        JOptionPane.showMessageDialog(this, "Codigo inexistente");
+        JOptionPane.showMessageDialog(this,"No se encontró ningúnproducto con el código: "+codigo,"Codigo inexistente",JOptionPane.PLAIN_MESSAGE);
         limpiar();
         
-    }//GEN-LAST:event_JbBuscarActionPerformed
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        int opcion=JOptionPane.showConfirmDialog(this, "Confirma Eliminación S/N", "Confirmación",JOptionPane.YES_NO_OPTION);
+        int opcion=JOptionPane.showConfirmDialog(this, "¿Desea eliminar el producto: "+auxiliar.getCodigo()+" - "+auxiliar.getDescripcion()+"?", "Eliminar producto exixtente",JOptionPane.YES_NO_OPTION);
                 if(opcion==JOptionPane.YES_OPTION){
                      productos.remove(auxiliar);
                     JOptionPane.showMessageDialog(this, "Producto Eliminado ");
@@ -270,14 +264,14 @@ public Gestion() {
         int codigo;
         String descripcion;
         double precio;
-        Rubro rubro;
+        Rubro rubro=new Rubro();
         int stock;
        
         if(validaEntero(jtCodigo.getText())){
             codigo = Integer.parseInt(jtCodigo.getText());
         }else {
         
-            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número.","Código incorrecto",JOptionPane.ERROR_MESSAGE);
             jtCodigo.requestFocus();
             return;
         }
@@ -286,16 +280,18 @@ public Gestion() {
             stock = Integer.parseInt(jtStock.getText());
         }else {
         
-            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número.","Valor de stock incorrecto",JOptionPane.ERROR_MESSAGE);
             jtStock.requestFocus();
             return;
         }
         
         if(validaReal(jtPrecio.getText())){
+            
             precio = Double.parseDouble(jtPrecio.getText());
+            
         }else {
         
-            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número.","Precio incorrecto",JOptionPane.ERROR_MESSAGE);
             jtPrecio.requestFocus();
             return;
         }
@@ -304,28 +300,26 @@ public Gestion() {
         
             descripcion = jtDescripcion.getText();
         }else {
-            JOptionPane.showMessageDialog(this, "Ingresar una descripcion");
+            JOptionPane.showMessageDialog(this, "Debe ingresar una descripción.","Descripción incorrecta",JOptionPane.ERROR_MESSAGE);
             jtDescripcion.requestFocus();
             return;
         }
-        //  
+        
         rubro =(Rubro) jcRubros.getSelectedItem();
 
-// aca tira el error 
-        Producto nvoProd=new Producto(codigo,descripcion,precio,rubro, stock);
-       if(productos.add(nvoProd)){
-           JOptionPane.showMessageDialog(this, "Producto Agregado");
-           limpiar();
-       }else {
+        
+        Producto nvoProd=new Producto(codigo,descripcion,stock,precio,rubro);
+        if(productos.add(nvoProd)){
+            JOptionPane.showMessageDialog(this, "Producto Agregado");
+            limpiar();
+        }else {
        
-           JOptionPane.showMessageDialog(this, "Ya existe un producto con ese código");
-       }
-       
-                // TODO add your handling code here:
+            JOptionPane.showMessageDialog(this, "Ya existe un producto con ese código","Código existente",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-     limpiar();        // TODO add your handling code here:
+        limpiar();        // TODO add your handling code here:
     }//GEN-LAST:event_jbNuevoActionPerformed
 
   private boolean validaEntero(String nro){
@@ -336,7 +330,7 @@ public Gestion() {
     }
 
     private boolean validaReal(String nro){
-    Pattern patron=Pattern.compile("^[0-9]+.[0-9]{2}$");
+    Pattern patron=Pattern.compile("^[0-9]+[.]{0,1}[0-9]{0,2}$");
         Matcher m=patron.matcher(nro);
         return m.matches();
         
@@ -354,8 +348,6 @@ public Gestion() {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JbBuscar;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -363,13 +355,26 @@ public Gestion() {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
-    private javax.swing.JComboBox<String> jcRubros;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<Rubro> jcRubros;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtDescripcion;
     private javax.swing.JTextField jtPrecio;
     private javax.swing.JTextField jtStock;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarCombo(){
+        Rubro comestible=new Rubro(1,"Comestible");
+        Rubro limpieza=new Rubro(2,"Limpieza");
+        Rubro perfumeria=new Rubro(3,"Perfumeria");
+        
+        jcRubros.addItem(comestible);
+        jcRubros.addItem(limpieza);
+        jcRubros.addItem(perfumeria);
+        jcRubros.setSelectedIndex(-1);
+    }
 }

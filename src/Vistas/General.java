@@ -118,7 +118,7 @@ public class General extends javax.swing.JFrame {
 
     //EVENTO HACER CLICK en GESTION de PRODUCTO.
     private void jmGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionActionPerformed
-        Gestion producto=new Gestion();
+        Gestion producto=new Gestion(listaProd);
         escritorio.removeAll();
         escritorio.repaint();
         escritorio.add(producto);
@@ -189,11 +189,6 @@ public class General extends javax.swing.JFrame {
                 new General().setVisible(true);
             }
         });
-        /*    java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu().setVisible(true);
-            }
-        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

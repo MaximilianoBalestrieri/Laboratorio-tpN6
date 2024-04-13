@@ -27,6 +27,10 @@ public class Producto implements Comparable<Producto>{
     public Producto() {
     }
 
+    public Producto(int codigo, String descripcion, double precio, Rubro rubro, int stock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getCodigo() {
         return codigo;
     }

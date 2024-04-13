@@ -221,7 +221,7 @@ public Gestion() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-dispose();      // TODO add your handling code here:
+     dispose();    
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void JbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbBuscarActionPerformed
@@ -243,7 +243,7 @@ dispose();      // TODO add your handling code here:
                 jtDescripcion.setText(prod.getDescripcion());
                 jtPrecio.setText(prod.getPrecio()+"");
                 jtStock.setText(prod.getStock()+"");
-                jcRubros.setSelectedItem(prod.getCategoria());
+                jcRubros.setSelectedItem(prod.getRubro());
                 jbEliminar.setEnabled(true);
                 auxiliar=prod;
                 return;

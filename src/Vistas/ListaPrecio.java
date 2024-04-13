@@ -212,7 +212,8 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtEntre1;
     private javax.swing.JTextField jtEntre2;
     private javax.swing.JTable tablaProd;
-    // End of variables declaration                   
+    // End of variables declaration          
+    
  private void borrarFilas() {
         int filas = tablaProducto.getRowCount();
 

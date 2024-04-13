@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import Entidades.Producto;
+import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,17 +15,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaPrecio extends javax.swing.JInternalFrame {
 
-      DefaultTableModel tablaProducto= new DefaultTableModel();
+    DefaultTableModel tablaProducto = new DefaultTableModel();
+
+    private TreeSet<Producto> productos;
+    private int buscar1;
     /**
      * Creates new form ListaPrecio
      */
-    public ListaPrecio() {
+    public ListaPrecio(TreeSet<Producto> productos) {
+        
         initComponents();
-       String[]titulo=new String[]{ "Código", "Descripcion", "Precio", "Stock"};
-       tablaProducto.setColumnIdentifiers(titulo);
+        this.productos=productos;
+
        
+        
+        String[]titulo=new String[]{ "Código", "Descripcion", "Precio","Rubro", "Stock"};
+        tablaProducto.setColumnIdentifiers(titulo);
         tablaProd.setModel(tablaProducto);
+        mostrarTodo();
     }
+
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,8 +50,8 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jtEntre1 = new javax.swing.JTextField();
+        jtEntre2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProd = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -56,11 +68,21 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("y");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 51, 153));
+        jtEntre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtEntre1.setForeground(new java.awt.Color(0, 51, 153));
+        jtEntre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtEntre1KeyPressed(evt);
+            }
+        });
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 51, 153));
+        jtEntre2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtEntre2.setForeground(new java.awt.Color(0, 51, 153));
+        jtEntre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtEntre2KeyPressed(evt);
+            }
+        });
 
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,11 +109,11 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
                         .addGap(108, 108, 108)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtEntre1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(28, 28, 28)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtEntre2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -114,8 +136,8 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtEntre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtEntre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -141,6 +163,44 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtEntre1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtEntre1KeyPressed
+        // TODO add your handling code here:
+        int buscar = Integer.parseInt(jtEntre1.getText());
+        boolean hayElementos = false;
+        buscar1= buscar;
+        borrarFilas();
+
+        
+        if (jtEntre1.getText().isEmpty()) {
+            hayElementos = true;
+            mostrarTodo();
+        } else {//Si hay texto, busca coincidencia con la descripción del producto y lo muestra en la tabla
+            for (Producto prod : productos) {
+                if (prod.getPrecio()>buscar) {
+                    hayElementos = true;
+                    tablaProducto.addRow(new Object[]{prod.getCodigo(), prod.getDescripcion(), prod.getPrecio(), prod.getRubro().getNombre(), prod.getStock()});
+                }
+            }
+        }
+        //Si no hubo coincidencias, avisa que con Mensaje.
+        if (!hayElementos) {
+            tablaProducto.addRow(new Object[]{"No hay elementos que coincidan con la busqueda"});
+        }
+    }//GEN-LAST:event_jtEntre1KeyPressed
+
+    private void jtEntre2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtEntre2KeyPressed
+        // TODO add your handling code here:
+         int buscar2 = Integer.parseInt(jtEntre2.getText());
+
+    borrarFilas(); 
+
+    for (Producto prod : productos) {
+        if (prod.getPrecio() >= buscar1 && prod.getPrecio() <= buscar2) {
+            tablaProducto.addRow(new Object[]{prod.getCodigo(), prod.getDescripcion(), prod.getPrecio(), prod.getRubro().getNombre(), prod.getStock()});
+        }
+    }
+    }//GEN-LAST:event_jtEntre2KeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -149,8 +209,22 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jtEntre1;
+    private javax.swing.JTextField jtEntre2;
     private javax.swing.JTable tablaProd;
     // End of variables declaration//GEN-END:variables
+ private void borrarFilas() {
+        int filas = tablaProducto.getRowCount();
+
+        for (int i = filas - 1; i >= 0; i--) {
+            tablaProducto.removeRow(i);
+        }
+    }
+
+    
+    private void mostrarTodo() {
+        for (Producto prod : productos) {
+            tablaProducto.addRow(new Object[]{prod.getCodigo(), prod.getDescripcion(), prod.getPrecio(), prod.getRubro().getNombre(), prod.getStock()});
+        }
+    }
 }

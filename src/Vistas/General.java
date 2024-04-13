@@ -16,10 +16,17 @@ public class General extends javax.swing.JFrame {
          this.setLocationRelativeTo(null);
         //LISTA HARDCODE DE PRODUCTOS
         listaProd.add(new Producto(101,"Arroz",23,12.50,new Rubro(1,"Comestible")));
+
         listaProd.add(new Producto(102,"Polenta",3,92.23,new Rubro(1,"Comestible")));
         listaProd.add(new Producto(103,"Pollo",2,20.12,new Rubro(1,"Comestible")));
         listaProd.add(new Producto(104,"A Perfume",4,52.99,new Rubro(3,"Perfumeria")));
         listaProd.add(new Producto(105,"Limp Tree",2,55.12,new Rubro(2,"Limpieza")));
+
+        listaProd.add(new Producto(102,"Polenta",3,93.23,new Rubro(1,"Comestible")));
+        listaProd.add(new Producto(103,"Pollo",2,20.12,new Rubro(1,"Comestible")));
+        listaProd.add(new Producto(104,"A Perfume",4,52.99,new Rubro(3,"Perfumeria")));
+        listaProd.add(new Producto(105,"Limp Tree",2,55.23,new Rubro(2,"Limpieza")));
+
         listaProd.add(new Producto(107,"Rexona",4,15.15,new Rubro(3,"Perfumeria")));
         
     }

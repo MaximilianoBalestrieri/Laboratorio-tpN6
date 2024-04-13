@@ -18,7 +18,7 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
     DefaultTableModel tablaProducto = new DefaultTableModel();
 
     private TreeSet<Producto> productos;
-    private double buscar1;
+    private int buscar1;
     /**
      * Creates new form ListaPrecio
      */
@@ -165,7 +165,7 @@ public class ListaPrecio extends javax.swing.JInternalFrame {
 
     private void jtEntre1KeyPressed(java.awt.event.KeyEvent evt) {                                    
         // TODO add your handling code here:
-        double buscar = Double.parseDouble(jtEntre1.getText());
+        int buscar = Integer.parseInt(jtEntre1.getText());
         boolean hayElementos = false;
         buscar1= buscar;
         borrarFilas();

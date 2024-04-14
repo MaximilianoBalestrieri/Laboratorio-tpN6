@@ -305,7 +305,7 @@ public Gestion(TreeSet<Producto>productos) {
             return;
         }
         
-<<<<<<< Updated upstream
+
         if(!(jcRubros.getSelectedIndex()<0)){
             rubro =(Rubro) jcRubros.getSelectedItem();
         }else {
@@ -315,7 +315,7 @@ public Gestion(TreeSet<Producto>productos) {
         }
         
 
-=======
+
         rubro =(Rubro) jcRubros.getSelectedItem();
         
     if(jcRubros.getSelectedIndex()==-1){
@@ -324,7 +324,7 @@ public Gestion(TreeSet<Producto>productos) {
             jcRubros.requestFocus();
             return;
         }
->>>>>>> Stashed changes
+
         
         Producto nvoProd=new Producto(codigo,descripcion,stock,precio,rubro);
         if(productos.add(nvoProd)){
@@ -349,7 +349,7 @@ public Gestion(TreeSet<Producto>productos) {
     }
 
     private boolean validaReal(String nro){
-    Pattern patron=Pattern.compile("^[0-9]+[.]{0,1}[0-9]{0,2}$");
+    Pattern patron=Pattern.compile("[+]?[0-9]*\\.?[0-9]+$");
         Matcher m=patron.matcher(nro);
         return m.matches();
         

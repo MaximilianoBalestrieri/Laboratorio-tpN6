@@ -306,6 +306,9 @@ public Gestion(TreeSet<Producto>productos) {
         }
         
 
+
+
+
         if(!(jcRubros.getSelectedIndex()<0)){
             rubro =(Rubro) jcRubros.getSelectedItem();
         }else {
@@ -316,6 +319,7 @@ public Gestion(TreeSet<Producto>productos) {
         
 
 
+
         rubro =(Rubro) jcRubros.getSelectedItem();
         
     if(jcRubros.getSelectedIndex()==-1){
@@ -324,6 +328,7 @@ public Gestion(TreeSet<Producto>productos) {
             jcRubros.requestFocus();
             return;
         }
+
 
         
         Producto nvoProd=new Producto(codigo,descripcion,stock,precio,rubro);
